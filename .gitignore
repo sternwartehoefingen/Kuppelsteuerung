@@ -1,0 +1,70 @@
+# Arduino
+*.hex
+*.elf
+*.eep
+*.lss
+*.map
+*.sym
+*.o
+*.d
+*.a
+*.bin
+build/
+.build/
+*.ino.cpp
+
+# Arduino IDE
+.DS_Store
+.Trashes
+.Spotlight-V100
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Editors
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+*.sublime-*
+
+# Measurements (keep structure, ignore large log files)
+measurements/**/*.log
+measurements/**/*.csv
+!measurements/.gitkeep
+
+# Temporary files
+*.tmp
+*.bak
+*.cache
+
+# Compiled libraries
+*.dll
+!packages/pc-drivers/*.dll
+!packages/pc-drivers/*.dll_
+
+# Build artifacts
+*.zip
+!releases/*.zip
+
+# Python (if any test scripts)
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+.pytest_cache/
+venv/
+env/
+
+# Node (if any web tools)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+.npm/

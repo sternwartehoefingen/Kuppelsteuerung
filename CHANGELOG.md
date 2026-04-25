@@ -8,23 +8,30 @@ Format nach [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 ## [Unreleased] – 2026-04-25
 
 ### Added
-- Quellcode aus `Dome_Controller0-160806a.zip` in das Verzeichnis `Dome_Controller0/` extrahiert, damit alle Dateien per Git versionierbar sind.
-- Shutter-Pin-Definitionen für ATmega32U4 (Pro Micro) in `IO_Defines.h` ergänzt (`roofDriveClose`, `roofDriveOpen`, `roofSwitchClosed`, `roofSwitchOpened`). Zuvor fehlten diese Definitionen, was zu Compiler-Fehlern geführt hätte.
-- Shutter-Pin-Definitionen für SAM3X8E (Arduino Due) in `IO_Defines.h` ergänzt.
-- `void DriveWDT(bool DriveOn)` zur öffentlichen Schnittstelle in `AzDrive.h` hinzugefügt (fehlte trotz Nutzung in `AzCommand.ino`).
-- `README.md` vollständig neu erstellt mit Projektzweck, Projektstruktur, Installationsanleitung, Konfigurationsübersicht, Kommandoreferenz, Ausgabeformat-Erklärung und Entwicklungsablauf.
+- Projekt auf Monorepo-Struktur umgestellt:
+  - `packages/firmware-main/` – Aktuelle Firmware (Dome_Controller0)
+  - `packages/firmware-legacy/` – Ältere Version (Azimuth_Sensor5)
+  - `packages/pc-drivers/` – K8055D.dll, Demo-Tool
+  - `documentation/` – Strukturierte Dokumentation (user/technical/hardware)
+  - `measurements/` – Testdaten aus Inbetriebnahme
+  - `releases/` – Archivierte Firmware-Versionen
+- Quellcode aus `Dome_Controller0-160806a.zip` in `packages/firmware-main/` extrahiert, damit alle Dateien per Git versionierbar sind.
+- Shutter-Pin-Definitionen für ATmega32U4 (Pro Micro) und SAM3X8E (Arduino Due) in `IO_Defines.h` ergänzt.
+- `void DriveWDT(bool DriveOn)` zur öffentlichen Schnittstelle in `AzDrive.h` hinzugefügt.
+- [TECHNICAL.md](documentation/technical/TECHNICAL.md) erstellt: Vollständige technische Analyse mit Algorithmen-Erklärung, Datenfluss-Diagrammen, Hardware-Konfiguration.
 
 ### Fixed
-- **Kritischer Bug in `Shutter.ino` (`ShutterStart`):** Der `else`-Zweig (Schliessen) war identisch mit dem `if`-Zweig (Öffnen) – beide schalteten ausschliesslich den Öffnen-Relais ein. Der Schliessen-Zweig schaltet nun korrekt `roofDriveOpen` aus und `roofDriveClose` ein.
-- **Header/Implementierungs-Mismatch in `AzEncoder.h`:** `AzSignal_synthese` war mit Parameter `bool details` deklariert, aber in `AzEncoder.ino` ohne Parameter implementiert. Deklaration wurde auf `void AzSignal_synthese(void)` korrigiert.
+- **Kritischer Bug in `Shutter.ino` (`ShutterStart`):** Der `else`-Zweig (Schließen) war identisch mit dem `if`-Zweig (Öffnen) – beide schalteten ausschliesslich den Öffnen-Relais ein. Der Schließen-Zweig schaltet nun korrekt `roofDriveOpen` aus und `roofDriveClose` ein.
+- **Header/Implementierungs-Mismatch in `AzEncoder.h`:** `AzSignal_synthese` war mit Parameter `bool details` deklariert, aber in `AzEncoder.ino` ohne Parameter implementiert. Deklaration korrigiert.
 - **Veraltete Deklarationen in `AzDrive.h`:** `AzDrive_readDIO()` und `AzDrive_update()` existierten nicht mehr in der Implementierung (umbenannt in Version 2016-08). Ersetzt durch die tatsächlich vorhandenen Funktionen `AzDrive_CtrlReadDIO()` und `AzDrive_CtrlOutput()`.
-- **Zuweisung in Bedingung in `AzDrive.ino`:** `if (result = driveWDTtimeout < millis())` durch explizite Zuweisung vor der Bedingung ersetzt (`result = (...)`, dann `if (result)`), um unbeabsichtigte Seiteneffekte zu vermeiden.
-- **Tippfehler `enDebutOutput` → `enDebugOutput`** in `Dome_Controller0.ino`, `AzCommand.ino` und `AzMounts.ino`. Die Variable steuert die Debug-Ausgabe; „Debut" war ein Tippfehler für „Debug".
-- **Falscher Kommentar** im `CmdDebug_On`-Case in `AzCommand.ino`: Kommentar lautete „enable time trigger for output", korrekt ist „enable debug output".
+- **Zuweisung in Bedingung in `AzDrive.ino`:** `if (result = driveWDTtimeout < millis())` durch explizite Zuweisung vor der Bedingung ersetzt.
+- **Tippfehler `enDebutOutput` → `enDebugOutput`** in `Dome_Controller0.ino`, `AzCommand.ino` und `AzMounts.ino`.
+- **Falscher Kommentar** im `CmdDebug_On`-Case: Korrektur zu "enable debug output".
 
 ### Changed
-- `AzEncoder.h`: `zeroDetected` und `enEncoderSynthese` von `int` auf `bool` geändert (konsistent mit tatsächlicher Verwendung als Boolesche Werte).
-- `AzEncoder.h`: Veraltete `extern int dbgResolution`-Deklaration entfernt (Variable wurde nirgends definiert oder verwendet).
+- `AzEncoder.h`: `zeroDetected` und `enEncoderSynthese` von `int` auf `bool` geändert.
+- `AzEncoder.h`: Veraltete `extern int dbgResolution`-Deklaration entfernt.
+- README.md neu strukturiert mit Monorepo-Pfaden und Schnellstart-Anleitung.
 
 ---
 
