@@ -32,10 +32,11 @@ mountPosAttr_t CheckMountPosition2 (int16_t encoderValue, int16_t fensterbreite)
     Serial.print(MountPosition[MountIdx + 1]);
   */
 
-  while (MountPosition[MountIdx] > encoderValue)
+  // Bounds-Checks to prevent buffer overflow
+  while (MountIdx > 0 && MountPosition[MountIdx] > encoderValue)
     MountIdx--;
 
-  while (MountPosition[MountIdx + 1] <= encoderValue)
+  while (MountIdx < (MOUNTCOUNT - 1) && MountPosition[MountIdx + 1] <= encoderValue)
     MountIdx++;
 
   int d1 = encoderValue - MountPosition[MountIdx];

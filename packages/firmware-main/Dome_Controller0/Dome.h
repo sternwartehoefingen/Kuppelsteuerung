@@ -3,6 +3,7 @@
 
 #define MOUNTPOSMAX (2 * 1226)
 #define MOUNTOFFSET 802
+#define MOUNTCOUNT 32  // Number of physical mount positions
 
 // nach Messung vom 2016-01-09
 

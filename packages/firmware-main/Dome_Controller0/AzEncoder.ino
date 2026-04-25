@@ -5,12 +5,12 @@ int  encoderPos        = 0;
 unsigned int encoderMaxPos = 4;   // default
 bool PinsChanged       = false;
 bool enEncoderSynthese = false;
-int encGray;
+int encGray            = 0;  // Initialize to prevent undefined behavior
 resolution_t resolution;
 
-int sensorValA;
-int sensorValB;
-int sensorValI;
+int sensorValA = HIGH;  // Initialize to HIGH (pullup default)
+int sensorValB = HIGH;
+int sensorValI = HIGH;
 
 static int encoderPinALast = HIGH;
 static int encoderPinBLast = HIGH;

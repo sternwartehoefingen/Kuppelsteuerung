@@ -88,6 +88,8 @@
 #define OUT_AZ   0b00000001
 #define OUT_R    0b00000010
 
+#define INVALID_POSITION 9999L  // Sentinel value for uninitialized position
+
 #include "./Az_Global.h"
 #include "./IO_Defines.h"
 #include "./AzEncoder.h"
@@ -121,9 +123,9 @@ void setup() {
 
   //-- debug_setup ----------
   pinMode (debugPin1, OUTPUT);
-  //  pinMode (debugPin2, OUTPUT);
+  pinMode (debugPin2, OUTPUT);
   digitalWrite(debugPin1, LOW);
-  //  digitalWrite(debugPin2, LOW);
+  digitalWrite(debugPin2, LOW);
   //-- debug_setup end -------
 
   markIO();
@@ -149,9 +151,8 @@ void setup() {
 
 void loop() {
 
-  long Quad_Position;
-  static long Quad_PositionLast = 9999;
-  byte OutputMode;
+  long Quad_Position = 0;  // Initialize to prevent undefined behavior
+  static long Quad_PositionLast = INVALID_POSITION;
 
   digitalWrite(debugPin2, HIGH);
   AzEncoder_read();
@@ -164,7 +165,7 @@ void loop() {
     }
   }
 
-  if (PinsChanged | infoRequest | doRadiusOutput)      // Ausgabe automatisch
+  if (PinsChanged || infoRequest || doRadiusOutput)      // Ausgabe automatisch
     //  if (infoRequest)                  // Ausgabe nur auf Anforderung
   {
     bool doOutput = !doRadiusOutput;                  // default
@@ -284,7 +285,7 @@ void SerialPrint_int4 (int value)
 {
 #ifdef LEADINGZEROS
   //-- uses 1550 byte of flash --------------
-  sprintf (buf, "%04d", value);   // int mit insgesamt 4 Stellen mit führenden Nullen ; sonst "%04d" ändern
+  snprintf (buf, sizeof(buf), "%04d", value);   // int mit insgesamt 4 Stellen mit führenden Nullen ; sonst "%04d" ändern
   Serial.print(buf);
   //-----------------------------------------
 #else
