@@ -1,0 +1,28 @@
+Installation ASCOM Treiber für Domesteuerung
+Sternwarte Höfingen
+Stand: 2018-07-06 RW
+
+ASCOM Treiber für FS2:	AdvancedLX200 Setup 6.2.0.9.exe
+ASCOM Treiber für Dome:	SimpleDome Setup.exe (als Admin installieren)
+
+Im ASCOM POTH Setup:
+	
+	1. Dome>> ausklappen
+	2. Choose Dome: simpledome
+	3. Properties: COM3 (ggf. im Gerätemanager anpassen, CH340 Serial)
+	4. Advanced>> ausklappen
+	
+	5. Site Information
+		Latitude  / °,': N 48 49,162 
+		Longitude / °,': E 009 00,325
+		Elevations  / m: 410,0
+
+	6. Geometry: 
+		Scope Position +E/-W:  0 mm
+		Scope Position +N/-S: 65 mm
+		Scope Position +U/-D:  0 mm
+		Dome Radius:         1,95 m
+		GEM Axis Offset:     440 mm
+	6. Slave Control: 
+		Slave Precision (deg): 2
+		Slave Frequency (sec): 5

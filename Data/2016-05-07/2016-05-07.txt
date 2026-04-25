@@ -1,0 +1,17 @@
+Radiusreferenz auf 15, 20 Skt = 3 mm
+Armlänge R-Taster: 90 mm
+schwergängig bei 1 am Antrieb
+
+Manuelle zügige Drehung
+File: output_2016-05-07_18-01-08.log
+Manuell CW
+Status
+Manuel CCW
+Status
+Manuell CW
+Status
+Manuel CCW
+Status
+
+--------
+
