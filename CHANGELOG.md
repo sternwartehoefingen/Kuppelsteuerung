@@ -5,7 +5,39 @@ Format nach [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ---
 
-## [Unreleased] – 2026-04-25
+## [Unreleased] – Branch: feature/absolute-positioning
+
+### Added
+- **Absolute Positionierung mit Reed-Kontakten** (`AbsolutePosition.h/ino`):
+  - 2 Reed-Kontakte erkennen 3 Referenzpositionen (0°, 120°, 240°)
+  - Automatische Encoder-Synchronisation beim Überfahren der Magnetpositionen
+  - Drift-Erkennung mit Warnung (Toleranz ±10 Impulse = ±0,3°)
+  - Encoder-Schlupf wird erkannt und gemeldet
+  - Status-Anzeige in serieller Ausgabe: `Ref:OK[11](3)`
+- Pin-Definitionen für Reed-Kontakte in `IO_Defines.h`:
+  - ATmega328P: A6/A7
+  - ATmega32U4: Pin 16/17
+  - SAM3X8E: Pin 38/40
+- [ABSOLUTE_POSITIONING.md](packages/firmware-main/Dome_Controller0/ABSOLUTE_POSITIONING.md): 
+  Vollständige Dokumentation mit Hardware-Setup, Montage-Anleitung, Schaltplan
+
+### Changed
+- `Dome_Controller0.ino`: Integration von `AbsPos_setup()`, `AbsPos_check()`, `AbsPos_showState()`
+- `AzEncoder.h`: `update_encoderPos()` als extern deklariert für Zugriff durch AbsolutePosition
+
+### Hardware-Anforderungen (optional)
+- 2× Reed-Kontakte (z.B. MK04-1A66B-500W)
+- 3× Neodym-Magnete 10×5mm
+- Kosten: ~5€
+
+### Vorteile
+- Kein Homing nach Power-Cycle mehr nötig (max. 120° Suchfahrt)
+- Automatische Drift-Korrektur alle 120°
+- Redundanz zur reinen Inkremental-Messung
+
+---
+
+## [Unreleased] – 2026-04-26 (main branch)
 
 ### Added
 - Projekt auf Monorepo-Struktur umgestellt:

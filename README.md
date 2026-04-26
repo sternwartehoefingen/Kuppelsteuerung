@@ -2,6 +2,25 @@
 
 Arduino-basierte Azimut-Sensorik und Motorsteuerung für die Observatoriumskuppel der Sternwarte Hüfingen.
 
+> **⚠️ Feature-Branch:** Diese Version enthält **absolute Positionierung mit Reed-Kontakten** (experimentell).  
+> Für die stabile Version ohne zusätzliche Hardware → Branch `main`
+
+## Was ist neu in diesem Branch?
+
+✨ **Absolute Positionierung** – 2 Reed-Kontakte + 3 Magnete ermöglichen:
+- Automatische Encoder-Synchronisation nach Power-Up (kein manuelles Homing mehr)
+- Drift-Korrektur alle 120° während des Betriebs
+- Encoder-Schlupf-Erkennung
+
+📖 Details → [ABSOLUTE_POSITIONING.md](packages/firmware-main/Dome_Controller0/ABSOLUTE_POSITIONING.md)
+
+**Hardware-Upgrade optional:**
+- 2× Reed-Kontakte (~3€)
+- 3× Neodym-Magnete (~2€)
+- Firmware funktioniert auch ohne diese Hardware (ignoriert fehlende Sensoren)
+
+---
+
 ## Projektzweck
 
 Das System misst die Azimutposition der Kuppel über einen Inkremental-Encoder und steuert den Kuppelantrieb. Es kommuniziert mit einem PC über RS-232/USB und ist in die ASCOM-Treiberinfrastruktur (SimpleDome) eingebunden, die eine automatische Nachführung der Kuppel durch den Teleskop-Mount ermöglicht.
