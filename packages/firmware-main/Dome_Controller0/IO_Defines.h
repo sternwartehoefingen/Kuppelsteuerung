@@ -33,6 +33,10 @@
 #define roofSwitchClosed  11  // Input: Rückmeldung Endpositon Dach/Spalt
 #define roofSwitchOpened   12  // Input: Rückmeldung Endpositon Dach/Spalt
 
+// Absolute positioning reed contacts (2 contacts for 3 reference positions)
+#define reedContact1Pin   A6  // Input: Reed contact 1 (MSB)
+#define reedContact2Pin   A7  // Input: Reed contact 2 (LSB)
+
 #define debugPin1 13    // 12 in 2016-04...
 #define debugPin2 13
 //--------------------------------------------------------------------
@@ -62,6 +66,10 @@
 #define roofDriveOpen   A4  // Output: Ansteuerung Motor Dach/Spalt oeffnen
 #define roofSwitchClosed 14  // Input: Endposition geschlossen
 #define roofSwitchOpened 15  // Input: Endposition geoeffnet
+
+// Absolute positioning reed contacts
+#define reedContact1Pin  16  // Input: Reed contact 1 (MSB)
+#define reedContact2Pin  17  // Input: Reed contact 2 (LSB)
 
 #define debugPin1 12
 #define debugPin2 13
@@ -103,6 +111,10 @@
 #define roofDriveOpen   32  // Output: Ansteuerung Motor Dach/Spalt oeffnen
 #define roofSwitchClosed 34  // Input: Endposition geschlossen
 #define roofSwitchOpened 36  // Input: Endposition geoeffnet
+
+// Absolute positioning reed contacts
+#define reedContact1Pin  38  // Input: Reed contact 1 (MSB)
+#define reedContact2Pin  40  // Input: Reed contact 2 (LSB)
 
 #define debugPin1 14
 #define debugPin2 13

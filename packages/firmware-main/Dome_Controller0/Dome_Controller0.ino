@@ -99,6 +99,7 @@
 #include "./Dome.h"
 #include "./Shutter.h"
 #include "./Quadratur_TC2.h"
+#include "./AbsolutePosition.h"
 
 char buf[10];
 bool includeDetail = true;
@@ -134,6 +135,8 @@ void setup() {
   AzDrive_setup(true);
   markIO();
   Shutter_setup();
+  markIO();
+  AbsPos_setup();
   markIO();
 
   AzEncoder_read();
@@ -220,6 +223,8 @@ void loop() {
         Mounts_showNr();
       else
         Mounts_showState();
+      
+      AbsPos_showState(includeDetail);
     }
 
     if (doOutput || (doRadiusOutput && (Quad_Position != Quad_PositionLast)) ) {
@@ -241,6 +246,9 @@ void loop() {
   // controlled by driveControl via serial command and digital input
   AzDrive_CtrlReadDIO();
   AzDrive_CtrlOutput();
+
+  // Check absolute position reed contacts
+  AbsPos_check();
 
   Command_Check();
   digitalWrite(debugPin2, LOW);

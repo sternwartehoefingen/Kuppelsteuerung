@@ -13,6 +13,7 @@ extern bool enEncoderSynthese;
 
 void AzEncoder_setup(unsigned int MaxPos, resolution_t selectResolution);
 void AzEncoder_read(void);
+void update_encoderPos(void);
 void AzSignal_echo(void);
 
 #ifdef ENCODER_SYNTH
