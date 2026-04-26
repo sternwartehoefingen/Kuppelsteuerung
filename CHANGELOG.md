@@ -5,7 +5,19 @@ Format nach [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ---
 
-## [Unreleased] – 2026-04-25
+## [Unreleased] – 2026-04-26
+
+### Added
+- **ESP32-Port** (`packages/firmware-main/Dome_Controller_ESP32/`):
+  - WiFi-Konnektivität ersetzt K8055N USB-Interface
+  - ASCOM Alpaca REST API (moderne Alternative zu SimpleDome Serial)
+  - Web-Interface Seite 1: Grafische Azimut-Anzeige mit SVG-Kompass
+  - Web-Interface Seite 2: Echtzeit Debug-Informationen (200ms Update)
+  - Hardware PCNT für Encoder (ESP32-Peripheral, kein CPU-Overhead)
+  - Reed-Kontakte mit automatischer Positionssynchronisation (0°, 120°)
+  - mDNS: Zugriff über `http://dome-controller.local`
+  - Umfassende Dokumentation in [README_ESP32.md](packages/firmware-main/Dome_Controller_ESP32/README_ESP32.md)
+- **WiFi-Credentials-Schutz**: `ESP32_Config.h` wird via `.gitignore` ausgeschlossen, Template-Datei `ESP32_Config.h.template` mit Platzhaltern committed
 
 ### Added
 - Projekt auf Monorepo-Struktur umgestellt:

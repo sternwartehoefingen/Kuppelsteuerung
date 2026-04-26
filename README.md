@@ -22,26 +22,52 @@ Das System misst die Azimutposition der Kuppel über einen Inkremental-Encoder u
 ```
 Kuppelsteuerung/
 ├── packages/
-│   ├── firmware-main/          # Aktuelle Firmware (Dome_Controller0)
-│   ├── firmware-legacy/        # Ältere Version (Azimuth_Sensor5)
-│   └── pc-drivers/             # K8055D.dll, Demo-Tool
+│   ├── firmware-main/
+│   │   ├── Dome_Controller0/        # Arduino-Firmware (original)
+│   │   └── Dome_Controller_ESP32/   # ESP32-Port mit ASCOM Alpaca + Web-UI
+│   ├── firmware-legacy/             # Ältere Version (Azimuth_Sensor5)
+│   └── pc-drivers/                  # K8055D.dll, Demo-Tool
 ├── documentation/
-│   ├── user/                   # Installation, Setup-Anleitungen
-│   ├── technical/              # Vollständige Funktionsanalyse
-│   └── hardware/               # Hardware-Handbücher, Schaltpläne
-├── measurements/               # Testdaten, Kalibrierungs-Logs
-└── releases/                   # Archivierte Firmware-Versionen
+│   ├── user/                        # Installation, Setup-Anleitungen
+│   ├── technical/                   # Vollständige Funktionsanalyse
+│   └── hardware/                    # Hardware-Handbücher, Schaltpläne
+├── measurements/                    # Testdaten, Kalibrierungs-Logs
+└── releases/                        # Archivierte Firmware-Versionen
 ```
 
 ## Schnellstart
 
-### 1. Firmware flashen
+### Firmware-Optionen
+
+**Option A: Arduino (klassisch)**
+- Serial + K8055N USB-Interface
+- ASCOM SimpleDome
+
+**Option B: ESP32 (modern)** 🆕
+- WiFi statt USB
+- ASCOM Alpaca REST API
+- Web-Interface mit Kompass-Anzeige
+- Siehe [ESP32 README](packages/firmware-main/Dome_Controller_ESP32/README_ESP32.md)
+
+### 1. Firmware flashen (Arduino)
 
 ```bash
 # Arduino IDE öffnen
 # packages/firmware-main/Dome_Controller0/Dome_Controller0.ino laden
 # Board wählen: Arduino Nano / Pro Micro / Due
 # Upload
+```
+
+### 1. Firmware flashen (ESP32)
+
+```bash
+# WiFi-Config vorbereiten
+cd packages/firmware-main/Dome_Controller_ESP32
+cp ESP32_Config.h.template ESP32_Config.h
+# ESP32_Config.h bearbeiten (SSID/PW)
+
+# Mit PlatformIO kompilieren und flashen
+pio run --target upload
 ```
 
 ### 2. K8055N-Treiber installieren
