@@ -48,6 +48,9 @@ measurements/**/*.csv
 # Compiled libraries
 *.dll
 !packages/pc-drivers/*.dll
+
+# ESP32 WiFi Credentials (use .template files)
+packages/firmware-main/Dome_Controller_ESP32/ESP32_Config.h
 !packages/pc-drivers/*.dll_
 
 # Build artifacts
